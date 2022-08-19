@@ -1,6 +1,6 @@
 # poke-store-api
 
-An api to serve data for a poke shop
+An api to serve data for a carbid site
 
 ## Prompt
 
