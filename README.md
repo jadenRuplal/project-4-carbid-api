@@ -28,7 +28,7 @@ Express
 | PATCH  | `/listing/:id`       | `users#editlisting`       |
 | DELETE | `/listing/:id`       | `users#deleteslist`       |
 | GET    | `/cars`              | `GetListings`             |
-| PATCH  | `/cars/:id`          | `show#cars`               |
+| GET    | `/cars/:id`          | `show#cars`               |
 | POST   | `/cars/:id/comments` | `users#addcommentstocars` |
 | DELETE | `/cars/:id/comments` | `users#deletescomments`   |
 | PATCH  | `/cars/:id`          | `users#updatescurrentbid` |
