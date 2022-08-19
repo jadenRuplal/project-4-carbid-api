@@ -41,8 +41,4 @@ This api updates everything a user does on the front end from logging in to purc
 
 ![ERD](resource/images/Erd.png)
 
-## Wireframe
-
-![Wireframe]()
-
 ## API
