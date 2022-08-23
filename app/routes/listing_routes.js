@@ -28,16 +28,17 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // INDEX
-// GET /carts
-router.get('/myCars',  (req, res, next) => {
-	
-    Car.find({owner: req.session.user})
-		.then((car) => {
-			// `carts` will be an array of Mongoose documents
-			// we want to convert each one to a POJO, so we use `.map` to
-			// apply `.toObject` to each one
-			return car.map((car) => car.toObject())
-		})
+// GET /cars
+router.get('/myCars', requireToken, (req, res, next) => {
+	// console.log('hitting this route', req.user)
+    Car.find({owner: req.user})
+		// .then((car) => {
+		// 	// `carts` will be an array of Mongoose documents
+		// 	// we want to convert each one to a POJO, so we use `.map` to
+		// 	// apply `.toObject` to each one
+        //     console.log(car)
+        //     car.map((c) => c.toObject())
+		// })
 		// respond with status 200 and JSON of the carts
 		.then((car) => res.status(200).json({ car: car }))
 		// if an error occurs, pass it to the handler

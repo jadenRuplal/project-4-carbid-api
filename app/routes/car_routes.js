@@ -74,10 +74,10 @@ router.post('/cars', requireToken, (req, res, next) => {
 
 // UPDATE
 // PATCH /cars/id
-router.patch('/cars/:id', requireToken, removeBlanks, (req, res, next) => {
+router.patch('/myCars/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
 	// owner, prevent that by deleting that key/value pair
-	delete req.body.car.owner
+	// delete req.body.car.owner
 
 	Car.findById(req.params.id)
 		.then(handle404)
@@ -95,9 +95,42 @@ router.patch('/cars/:id', requireToken, removeBlanks, (req, res, next) => {
 		.catch(next)
 })
 
+
+
+
+
+
+// Bid update
+
+router.patch('/cars/bid/:id', requireToken, removeBlanks, async function (req, res, next) {
+	// if the client attempts to change the `owner` property by including a new
+	// owner, prevent that by deleting that key/value pair
+
+    console.log('this is req.body', req.body)
+	Car.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true}, async function(err, found) {
+       console.log('this is found.startingbid', found.startingbid)
+        res.json(found)
+    })
+		// .then(handle404)
+		// .then((car) => {
+		// 	// pass the `req` object and the Mongoose record to `requireOwnership`
+		// 	// it will throw an error if the current user isn't the owner
+		// 	// pass the result of Mongoose's `.update` to the next `.then`
+		// 	return car.updateOne(req.body)
+		// })
+        
+		// // if that succeeded, return 204 and no JSON
+		// .then((c) => 
+        // {res.json({ car: c })
+        // console.log('this is json', c)}
+        // )
+		// // if an error occurs, pass it to the handler
+		// .catch(next)
+})
+
 // DESTROY
 // DELETE /cars/id
-router.delete('/cars/:id', requireToken, (req, res, next) => {
+router.delete('/myCars/:id', requireToken, (req, res, next) => {
 	Car.findById(req.params.id)
 		.then(handle404)
 		.then((car) => {

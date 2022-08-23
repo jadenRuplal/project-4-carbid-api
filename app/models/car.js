@@ -45,6 +45,9 @@ const carSchema = new mongoose.Schema(
 			ref: 'User',
 			required: true,
 		},
+		highestbid: {
+			type: String
+		},
         comments: [commentSchema]
 	},
 	{
