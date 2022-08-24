@@ -27,9 +27,10 @@ const requireToken = passport.authenticate('bearer', { session: false })
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
-router.post('cars/comments', (req, res) => {
-    const carId = req.params.car._id
-    req.body.author = req.body.user._id
+router.post('/cars/:id/comments', (req, res) => {
+    const carId = req.params.id
+    req.body.email = req.body.user.email
+    req.body.owner = req.body.user._id
     console.log(req.body.user._id, carId)
     Car.findById(carId)
         .then(car => {
@@ -39,7 +40,7 @@ router.post('cars/comments', (req, res) => {
         })
         .then(car => {
             console.log('hi')
-            res.redirect(`/cars/${car._id}`)
+            res.redirect(`/cars/${carId}`)
         })
         .catch(err => {
             res.json(err)
@@ -47,6 +48,17 @@ router.post('cars/comments', (req, res) => {
         })
 })
 
+
+// SHOW
+// router.get('/cars/:id', requireToken, (req, res, next) => {
+// 	// req.params.id will be set based on the `:id` in the route
+// 	Example.findById(req.params.id)
+// 		.then(handle404)
+// 		// if `findById` is succesful, respond with 200 and "example" JSON
+// 		.then((example) => res.status(200).json({ example: example.toObject() }))
+// 		// if an error occurs, pass it to the handler
+// 		.catch(next)
+// })
 
 
 

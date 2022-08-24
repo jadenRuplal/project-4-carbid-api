@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema(
 			required: true,
 			unique: true,
 		},
-		role: {
-			type: String,
+		admin: {
+			type: Boolean,
 		},
 		hashedPassword: {
 			type: String,

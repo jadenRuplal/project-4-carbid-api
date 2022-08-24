@@ -5,7 +5,11 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    author: {
+    email: {
+        type: String,
+        required: true
+    },
+    owner: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User' 
     }
