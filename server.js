@@ -2,6 +2,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const http = require('http')
+const {Server} = require('socket.io')
 
 // require route files
 const carRoutes = require('./app/routes/car_routes')
@@ -36,6 +38,13 @@ mongoose.connect(db, {
 
 // instantiate express application object
 const app = express()
+const httpServer = require("http").createServer()
+const server = http.createServer(app)
+const io = new Server(server, {
+	cors: {
+		origin: "http://localhost:3000"
+	}
+})
 
 // set CORS headers on response from this API using the `cors` NPM package
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
@@ -79,9 +88,22 @@ app.use(bidingRoutes)
 // passed any error messages from them
 app.use(errorHandler)
 
+
+
 // run API on designated port (4741 in this case)
-app.listen(port, () => {
-	console.log('listening on port ' + port)
+server.listen(port, () => {
+	console.log('server listening on port ' + port)
+})
+
+io.on("connection", (socket) => {
+	console.log('user Connected', socket.id)
+
+	socket.on("send_message", (data) => {
+		socket.broadcast.emit("recieve_message", data)
+	})
+	socket.on("send_bid", (newBid) => {
+		socket.broadcast.emit("recieve_bid", newBid)
+	})
 })
 
 // needed for testing

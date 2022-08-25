@@ -5,6 +5,7 @@ const passport = require('passport')
 
 // pull in Mongoose model for examples
 const Car = require('../models/car')
+const Comments = require('../models/comments')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -48,6 +49,32 @@ router.post('/cars/:id/comments', (req, res) => {
         })
 })
 
+
+router.delete('/cars/:carId/:commentId', requireToken, (req, res, next) => {
+    Car.findById(req.params.carId, function(err, car) {
+       console.log(car.comments)
+       console.log(req.params.commentId)
+      car.comments.splice(car.comments.findIndex(el => {
+        console.log(el.id)
+        return  el.id === req.params.commentId
+    }), 1)
+       car.save(function(err) {
+        console.log(err)
+       })
+    })
+		// .then(handle404)
+		// .then((comment) => {
+        //     console.log(comment)
+		// 	// throw an error if current user doesn't own `car`
+		// 	requireOwnership(req, comment)
+		// 	// delete the car ONLY IF the above didn't throw
+		// 	// comment.deleteOne()
+		// })
+		// // send back 204 and no content if the deletion succeeded
+		// .then(() => res.sendStatus(204))
+		// // if an error occurs, pass it to the handler
+		// .catch(next)
+})
 
 // SHOW
 // router.get('/cars/:id', requireToken, (req, res, next) => {
