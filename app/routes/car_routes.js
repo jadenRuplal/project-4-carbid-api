@@ -72,7 +72,7 @@ router.post('/cars', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
-// UPDATE
+
 // PATCH /cars/id
 router.patch('/myCars/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
@@ -140,6 +140,17 @@ router.delete('/myCars/:id', requireToken, (req, res, next) => {
 			car.deleteOne()
 		})
 		// send back 204 and no content if the deletion succeeded
+		.then(() => res.sendStatus(204))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
+// Car stock update
+router.patch('/cars/stock/:id', removeBlanks, (req, res, next) => {
+
+	Car.updateOne({_id: req.params.id}, {$inc: {stock: -1 }})
+		.then(handle404)
+		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
 		// if an error occurs, pass it to the handler
 		.catch(next)
