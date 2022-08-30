@@ -15,6 +15,11 @@ Express
 Clone the code off of Github into a repository. Then install all dependencies to prevent errors. Use npm start and run alongside client
 for functional app.
 
+commands:
+git clone https://github.com/jadenRuplal/project-4-carbid-api.git
+npm install (add all names from dependency in package.json)
+npm start (after install)
+
 ### Authentication
 
 | Verb   | URI Pattern          | Controller#Action         |
