@@ -12,9 +12,8 @@ Express
 
 ## Installation
 
-## Structure
-
-## API
+Clone the code off of Github into a repository. Then install all dependencies to prevent errors. Use npm start and run alongside client
+for functional app.
 
 ### Authentication
 
@@ -32,6 +31,8 @@ Express
 | POST   | `/cars/:id/comments` | `users#addcommentstocars` |
 | DELETE | `/cars/:id/comments` | `users#deletescomments`   |
 | PATCH  | `/cars/:id`          | `users#updatescurrentbid` |
+| GET    | `/myCars/`           | `showYour#cars`           |
+| GET    | `/bid/`              | `showyour#bids`           |
 
 ## About
 
@@ -41,4 +42,6 @@ This api updates everything a user does on the front end from logging in to purc
 
 ![ERD](resource/images/Erd.png)
 
-## API
+## Client
+
+https://github.com/jadenRuplal/project-4-carbid-client
