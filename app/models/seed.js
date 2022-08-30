@@ -22,7 +22,7 @@ mongoose.connect(db, {
     useNewUrlParser: true
 })
     .then(() => {
-        //delete items
+        //delete cars
         Car.deleteMany({ owner: null })
             .then(deletedCars => {
                 console.log('deletedCars', deletedCars)

@@ -3,7 +3,7 @@ const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require('passport')
 
-// pull in Mongoose model for examples
+// pull in Mongoose model for comments
 const Car = require('../models/car')
 const Comments = require('../models/comments')
 
@@ -76,16 +76,7 @@ router.delete('/cars/:carId/:commentId', requireToken, (req, res, next) => {
 		// .catch(next)
 })
 
-// SHOW
-// router.get('/cars/:id', requireToken, (req, res, next) => {
-// 	// req.params.id will be set based on the `:id` in the route
-// 	Example.findById(req.params.id)
-// 		.then(handle404)
-// 		// if `findById` is succesful, respond with 200 and "example" JSON
-// 		.then((example) => res.status(200).json({ example: example.toObject() }))
-// 		// if an error occurs, pass it to the handler
-// 		.catch(next)
-// })
+
 
 
 
